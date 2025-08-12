@@ -1,0 +1,41 @@
+pipeline {
+	agent any{
+	stages {
+	stage('checkout'){
+		steps{
+		//checkout your sourcecode from version control
+		git 'https://github.com/kAditya300/GFG-32-BATCH-MAVEN.git'
+		}
+		}
+	stage('Build'){
+		steps{
+		//use Maven to build your project
+		sh 'mvn clean pacakage'
+		}
+		}
+	stage('Test'){
+		steps{
+		//run test is applicable
+		sh 'mvn test'
+		}
+		}
+	stage('Deploy'){
+		steps{
+		//Deploy your artifact, if necessary
+		//e.g. sh 'mvn deploy'
+		}
+		}
+	post{
+	 success{
+		//this code will execute if pipeline runs successfully
+		echo 'Pipeline executed successfully!'
+		}
+	 failure{
+		//this block will execute if pipeline fails
+		echo 'Pipeline failed'
+		  }
+		}
+	    }
+	
+
+
